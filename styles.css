@@ -1,0 +1,60 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f2f5;
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #1e1e1e;
+    color: #fff;
+  }
+
+  input, textarea {
+    background: #2b2b2b;
+    color: #fff;
+    border: 1px solid #444;
+  }
+
+  button {
+    background: #007bff;
+  }
+}
+
+.container {
+  max-width: 400px;
+  width: 100%;
+}
+
+input, textarea, button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #0056b3;
+}
