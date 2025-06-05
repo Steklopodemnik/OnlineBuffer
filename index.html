@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Обменник</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: auto; }
+    input, textarea, button { width: 100%; margin-top: 10px; padding: 12px; font-size: 16px; }
+    button { background: #007bff; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Онлайн обменник</h2>
+  <input type="text" id="keyInput" placeholder="Ключ (например, chat1)">
+  <textarea id="textInput" placeholder="Введите текст..."></textarea>
+  <button onclick="saveData()">Сохранить</button>
+  <button onclick="loadData()">Получить</button>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "PASTE_YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function saveData() {
+      const key = document.getElementById('keyInput').value;
+      const text = document.getElementById('textInput').value;
+      if (key) {
+        db.ref('buffer/' + key).set({ text });
+        alert('Сохранено!');
+      } else {
+        alert('Введите ключ!');
+      }
+    }
+
+    function loadData() {
+      const key = document.getElementById('keyInput').value;
+      db.ref('buffer/' + key).once('value').then(snapshot => {
+        const data = snapshot.val();
+        document.getElementById('textInput').value = data ? data.text : 'Ничего не найдено';
+      });
+    }
+  </script>
+</body>
+</html>
